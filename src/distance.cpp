@@ -32,62 +32,6 @@ NumericMatrix fastPdist(NumericMatrix Ar, NumericMatrix Br) {
 }
 
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> fbd8a0de4e21aa0532b0beb264557a3a4a49443b
-// [[Rcpp::export]]
-NumericMatrix fastPdist2(NumericMatrix Ar, NumericMatrix Br) {
-  int m = Ar.nrow(), 
-    n = Br.nrow(),
-    k = Ar.ncol();
-  arma::mat A = arma::mat(Ar.begin(), m, k, false); 
-  arma::mat B = arma::mat(Br.begin(), n, k, false); 
-  
-  arma::colvec An =  sum(square(A),1);
-  arma::colvec Bn =  sum(square(B),1);
-  
-  arma::mat C = -2 * (A * B.t());
-  C.each_col() += An;
-  C.each_row() += Bn.t();
-  
-  return wrap(C); 
-}
-<<<<<<< HEAD
-=======
-
-
-
-
-
-
-
-// [[Rcpp::export]]
-NumericMatrix fastPdist2B(NumericMatrix X, NumericMatrix NP, int BlockSize, NumericVector SquaredX) {
-  
-  // Get dimension of the matrix
-  int n = X.nrow(), 
-    m = NP.nrow(),
-    k = NP.ncol();
-  
-  // Copy matrices to internal structures
-  arma::mat A = arma::mat(X.begin(), n, k, false); 
-  arma::mat B = arma::mat(NP.begin(), m, k, false); 
-  
-  arma::colvec An =  SquaredX;
-  arma::colvec Bn =  sum(square(B),1);
-  
-  arma::mat C = -2 * (A * B.t());
-  C.each_col() += An;
-  C.each_row() += Bn.t();
-  
-  return wrap(C); 
-}
-
-
-
-
 // [[Rcpp::export]]
 List fastPdist2List(NumericMatrix X, NumericMatrix NP, int BlockSize, NumericVector SquaredX) {
   
@@ -126,5 +70,3 @@ List fastPdist2List(NumericMatrix X, NumericMatrix NP, int BlockSize, NumericVec
   
 }
 
-
->>>>>>> fbd8a0de4e21aa0532b0beb264557a3a4a49443b
