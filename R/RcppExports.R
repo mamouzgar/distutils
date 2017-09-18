@@ -5,3 +5,7 @@ fastPdist <- function(Ar, Br) {
     .Call('_RFastDistance_fastPdist', PACKAGE = 'RFastDistance', Ar, Br)
 }
 
+fastPdist2 <- function(Ar, Br) {
+    .Call('_RFastDistance_fastPdist2', PACKAGE = 'RFastDistance', Ar, Br)
+}
+

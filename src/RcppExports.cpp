@@ -18,9 +18,22 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// fastPdist2
+NumericMatrix fastPdist2(NumericMatrix Ar, NumericMatrix Br);
+RcppExport SEXP _RFastDistance_fastPdist2(SEXP ArSEXP, SEXP BrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type Ar(ArSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type Br(BrSEXP);
+    rcpp_result_gen = Rcpp::wrap(fastPdist2(Ar, Br));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_RFastDistance_fastPdist", (DL_FUNC) &_RFastDistance_fastPdist, 2},
+    {"_RFastDistance_fastPdist2", (DL_FUNC) &_RFastDistance_fastPdist2, 2},
     {NULL, NULL, 0}
 };
 
