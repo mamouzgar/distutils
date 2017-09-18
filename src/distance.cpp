@@ -117,7 +117,7 @@ List fastPdist2List(NumericMatrix X, NumericMatrix NP, int BlockSize, NumericVec
   arma::vec dist = C.elem(eids);
   
   return List::create(Named("Patition") = as<std::vector<int> >(wrap(IdxVect+1)),
-                      Named("Dist") = as<std::vector<int> >(wrap(dist)));
+                      Named("Dist") = as<std::vector<double> >(wrap(dist)));
   
 }
 
