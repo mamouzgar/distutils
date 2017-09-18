@@ -9,3 +9,14 @@ fastPdist2 <- function(Ar, Br) {
     .Call('_RFastDistance_fastPdist2', PACKAGE = 'RFastDistance', Ar, Br)
 }
 
+<<<<<<< HEAD
+=======
+fastPdist2B <- function(X, NP, BlockSize, SquaredX) {
+    .Call('_RFastDistance_fastPdist2B', PACKAGE = 'RFastDistance', X, NP, BlockSize, SquaredX)
+}
+
+fastPdist2List <- function(X, NP, BlockSize, SquaredX) {
+    .Call('_RFastDistance_fastPdist2List', PACKAGE = 'RFastDistance', X, NP, BlockSize, SquaredX)
+}
+
+>>>>>>> fbd8a0de4e21aa0532b0beb264557a3a4a49443b

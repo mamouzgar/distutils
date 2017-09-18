@@ -32,6 +32,11 @@ NumericMatrix fastPdist(NumericMatrix Ar, NumericMatrix Br) {
 }
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> fbd8a0de4e21aa0532b0beb264557a3a4a49443b
 // [[Rcpp::export]]
 NumericMatrix fastPdist2(NumericMatrix Ar, NumericMatrix Br) {
   int m = Ar.nrow(), 
@@ -49,3 +54,77 @@ NumericMatrix fastPdist2(NumericMatrix Ar, NumericMatrix Br) {
   
   return wrap(C); 
 }
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+
+// [[Rcpp::export]]
+NumericMatrix fastPdist2B(NumericMatrix X, NumericMatrix NP, int BlockSize, NumericVector SquaredX) {
+  
+  // Get dimension of the matrix
+  int n = X.nrow(), 
+    m = NP.nrow(),
+    k = NP.ncol();
+  
+  // Copy matrices to internal structures
+  arma::mat A = arma::mat(X.begin(), n, k, false); 
+  arma::mat B = arma::mat(NP.begin(), m, k, false); 
+  
+  arma::colvec An =  SquaredX;
+  arma::colvec Bn =  sum(square(B),1);
+  
+  arma::mat C = -2 * (A * B.t());
+  C.each_col() += An;
+  C.each_row() += Bn.t();
+  
+  return wrap(C); 
+}
+
+
+
+
+// [[Rcpp::export]]
+List fastPdist2List(NumericMatrix X, NumericMatrix NP, int BlockSize, NumericVector SquaredX) {
+  
+  // Get dimension of the matrix
+  int n = X.nrow(), 
+    m = NP.nrow(),
+    k = NP.ncol();
+  
+  // Copy matrices to internal structures
+  arma::mat A = arma::mat(X.begin(), n, k, false); 
+  arma::mat B = arma::mat(NP.begin(), m, k, false); 
+  
+  arma::colvec An = SquaredX;
+  arma::colvec Bn = sum(square(B),1);
+  
+  arma::mat C = -2 * (A * B.t());
+  C.each_col() += An;
+  C.each_row() += Bn.t();
+  
+  arma::uvec IdxVect = arma::index_min(C, 1);
+  arma::urowvec IdxVect2(n);
+    
+  for(int i = 0; i< n; i++){
+    IdxVect2[i] = i;
+  }
+  
+  arma::umat locs(2, n);
+  locs.row(0) = IdxVect2;
+  locs.row(1) = IdxVect.t();
+  
+  arma::uvec eids = sub2ind(size(C), locs);
+  arma::vec dist = C.elem(eids);
+  
+  return List::create(Named("Patition") = as<std::vector<int> >(wrap(IdxVect+1)),
+                      Named("Dist") = as<std::vector<double> >(wrap(dist)));
+  
+}
+
+
+>>>>>>> fbd8a0de4e21aa0532b0beb264557a3a4a49443b
