@@ -18,34 +18,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// fastPdist2
-NumericMatrix fastPdist2(NumericMatrix Ar, NumericMatrix Br);
-RcppExport SEXP _RFastDistance_fastPdist2(SEXP ArSEXP, SEXP BrSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type Ar(ArSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type Br(BrSEXP);
-    rcpp_result_gen = Rcpp::wrap(fastPdist2(Ar, Br));
-    return rcpp_result_gen;
-END_RCPP
-}
-<<<<<<< HEAD
-=======
-// fastPdist2B
-NumericMatrix fastPdist2B(NumericMatrix X, NumericMatrix NP, int BlockSize, NumericVector SquaredX);
-RcppExport SEXP _RFastDistance_fastPdist2B(SEXP XSEXP, SEXP NPSEXP, SEXP BlockSizeSEXP, SEXP SquaredXSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type NP(NPSEXP);
-    Rcpp::traits::input_parameter< int >::type BlockSize(BlockSizeSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type SquaredX(SquaredXSEXP);
-    rcpp_result_gen = Rcpp::wrap(fastPdist2B(X, NP, BlockSize, SquaredX));
-    return rcpp_result_gen;
-END_RCPP
-}
 // fastPdist2List
 List fastPdist2List(NumericMatrix X, NumericMatrix NP, int BlockSize, NumericVector SquaredX);
 RcppExport SEXP _RFastDistance_fastPdist2List(SEXP XSEXP, SEXP NPSEXP, SEXP BlockSizeSEXP, SEXP SquaredXSEXP) {
@@ -60,16 +32,10 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
->>>>>>> fbd8a0de4e21aa0532b0beb264557a3a4a49443b
 
 static const R_CallMethodDef CallEntries[] = {
     {"_RFastDistance_fastPdist", (DL_FUNC) &_RFastDistance_fastPdist, 2},
-    {"_RFastDistance_fastPdist2", (DL_FUNC) &_RFastDistance_fastPdist2, 2},
-<<<<<<< HEAD
-=======
-    {"_RFastDistance_fastPdist2B", (DL_FUNC) &_RFastDistance_fastPdist2B, 4},
     {"_RFastDistance_fastPdist2List", (DL_FUNC) &_RFastDistance_fastPdist2List, 4},
->>>>>>> fbd8a0de4e21aa0532b0beb264557a3a4a49443b
     {NULL, NULL, 0}
 };
 

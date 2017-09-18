@@ -65,8 +65,13 @@ List fastPdist2List(NumericMatrix X, NumericMatrix NP, int BlockSize, NumericVec
   arma::uvec eids = sub2ind(size(C), locs);
   arma::vec dist = C.elem(eids);
   
-  return List::create(Named("Patition") = as<std::vector<int> >(wrap(IdxVect+1)),
-                      Named("Dist") = as<std::vector<double> >(wrap(dist)));
+  std::vector<int> Partition = arma::conv_to<std::vector<int> >::from(IdxVect+1);
+  std::vector<double>Disttance = arma::conv_to<std::vector<double> >::from(dist);
+  
+  List RetList = List::create(Named("Patition") = wrap(Partition),
+                              Named("Dist") = wrap(Disttance));
+  
+  return RetList;
   
 }
 
