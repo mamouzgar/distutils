@@ -18,6 +18,7 @@ NumericMatrix fastPdist(NumericMatrix Ar, NumericMatrix Br) {
   int m = Ar.nrow(), 
     n = Br.nrow(),
     k = Ar.ncol();
+  
   arma::mat A = arma::mat(Ar.begin(), m, k, false); 
   arma::mat B = arma::mat(Br.begin(), n, k, false); 
   
