@@ -14,7 +14,7 @@ using namespace Rcpp;
 List ComputeElasticEnergy(NumericMatrix X, NumericMatrix NodePositions, NumericMatrix ElasticMatrix, NumericVector Dists, double BranchingFee) {
   
   int k = NodePositions.nrow(),
-    // n = NodePositions.ncol(),
+    n = NodePositions.ncol(),
     i,
     j;
     
@@ -24,34 +24,37 @@ List ComputeElasticEnergy(NumericMatrix X, NumericMatrix NodePositions, NumericM
     TotEnergy = 0;
   
   arma::mat Lambda = arma::mat(ElasticMatrix.begin(), k, k, false);
-  // arma::mat NP = arma::mat(NodePositions.begin(), k, n, false);
+  arma::mat NP = arma::mat(NodePositions.begin(), k, n, false);
   arma::vec Mu = Lambda.diag(0);
   Lambda.diag(0).zeros();
   
   arma::uvec StarCenterIndices = arma::find(Mu);
   arma::uvec PosLambdaIdxs = find(Lambda);
-  arma::umat PosLambdaIdxsMat = ind2sub( size(Mu), PosLambdaIdxs);
+  arma::umat PosLambdaIdxsMat = ind2sub( size(Lambda), PosLambdaIdxs);
   
-  arma::vec dev;
+  arma::rowvec dev;
   double l;
   
-  for(i=0; i<k; i++){
-    dev = NodePositions.row(PosLambdaIdxsMat(i,1)) - NodePositions.row(PosLambdaIdxsMat(i,2));
-    l = Lambda(PosLambdaIdxsMat(i,1),PosLambdaIdxsMat(i,2));
-    EP =+ l*dot(dev,dev);
+  for(i=0; i<PosLambdaIdxs.size(); i++){
+    dev = NP.row(PosLambdaIdxsMat(0,i)) - NP.row(PosLambdaIdxsMat(1,i));
+    l = Lambda(PosLambdaIdxsMat(0,i),PosLambdaIdxsMat(1,i));
+    EP += l*arma::dot(dev,dev);
   }
   
   arma::uvec leafs;
-  arma::rowvec tVect;
+  // arma::rowvec tVect;
   
   for(i=0; i<StarCenterIndices.size(); i++){
     leafs = find(Lambda.col(StarCenterIndices[i]));
     j = leafs.size();
-    tVect = NodePositions.row(StarCenterIndices[i]);
+    dev = NP.row(StarCenterIndices[i]);
     for(k=0; k<j; k++){
-      tVect =- (1/k+1)*NodePositions.row(leafs[k]);
+      // Rcout << "info:" << 1/(double)j*NP.row(leafs[k]) << std::endl;
+      dev -= 1/(double)j*NP.row(leafs[k]);
     }
-    RP =+ Mu[StarCenterIndices[i]]*dot(dev,dev);
+    RP += Mu[StarCenterIndices[i]]*arma::dot(dev,dev);
+    // Rcout << "dev=" << NP.row(StarCenterIndices[i]) << std::endl;
+    // Rcout << "dev=" << dev << std::endl;
   }
   
   TotEnergy = EP + RP + MSE;
