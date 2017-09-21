@@ -8,8 +8,6 @@
 //
 // [[Rcpp::depends(RcppArmadillo)]]
 
-// C++ code taken from here : https://www.r-bloggers.com/pairwise-distances-in-r/
-//
 
 using namespace Rcpp;
 
@@ -17,7 +15,8 @@ using namespace Rcpp;
 //' 
 //' This function computes the distance between a matrix of data points and a
 //' matrix of reference points. Both matrices need to have the same number of
-//' dimensions (columns)
+//' dimensions (columns). The code was taked from here: // C++ code taken from here:
+//' https://www.r-bloggers.com/pairwise-distances-in-r/
 //' 
 //' @param Ar A numeric n-by-m matrix containing the position of n data points m-dimensional points
 //' @param Br A numeric k-by-m matrix containing the position of k reference m-dimensional points

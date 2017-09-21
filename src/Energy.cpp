@@ -10,6 +10,29 @@
 
 using namespace Rcpp;
 
+//' Compute the elastic energy associated with a particular configuration 
+//' 
+//' This function computes the elastic energy associate to a set of points and graph embedded
+//' into them. See XXX for reference
+//' 
+//' @param X A numeric n-by-m matrix containing the position of n data points m-dimensional points
+//' @param NodePositions A numeric k-by-m matrix containing the position of the k nodes of the embedded graph
+//' @param ElasticMatrix A numeric l-by-l matrix containing the elastic parameters associates with the edge
+//' of the embedded graph
+//' @param Dists A numeric vector containind the squared distance of the data points to the closest node of the graph
+//' @param BranchingFee a numeric value currently unused
+//' 
+//' @return A list with four elements:
+//' * ElasticEnergy is the total energy
+//' * EP is the EP component of the energy
+//' * RS is the RS component of the energy
+//' * MSE is the MSE component of the energy
+//' @md
+//' 
+//' @export
+//' 
+//' @examples 
+//' 
 // [[Rcpp::export]]
 List ElasticEnergy(NumericMatrix X, NumericMatrix NodePositions, NumericMatrix ElasticMatrix, NumericVector Dists, double BranchingFee) {
   
