@@ -6,40 +6,55 @@
 
 using namespace Rcpp;
 
-// fastPdist
-NumericMatrix fastPdist(NumericMatrix Ar, NumericMatrix Br);
-RcppExport SEXP _RFastDistance_fastPdist(SEXP ArSEXP, SEXP BrSEXP) {
+// PartialDistance
+NumericMatrix PartialDistance(NumericMatrix Ar, NumericMatrix Br);
+RcppExport SEXP _distutils_PartialDistance(SEXP ArSEXP, SEXP BrSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type Ar(ArSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type Br(BrSEXP);
-    rcpp_result_gen = Rcpp::wrap(fastPdist(Ar, Br));
+    rcpp_result_gen = Rcpp::wrap(PartialDistance(Ar, Br));
     return rcpp_result_gen;
 END_RCPP
 }
-// fastPdist2List
-List fastPdist2List(NumericMatrix X, NumericMatrix NP, int BlockSize, NumericVector SquaredX);
-RcppExport SEXP _RFastDistance_fastPdist2List(SEXP XSEXP, SEXP NPSEXP, SEXP BlockSizeSEXP, SEXP SquaredXSEXP) {
+// Partition
+List Partition(NumericMatrix Ar, NumericMatrix Br, NumericVector SquaredAr);
+RcppExport SEXP _distutils_Partition(SEXP ArSEXP, SEXP BrSEXP, SEXP SquaredArSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type Ar(ArSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type Br(BrSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type SquaredAr(SquaredArSEXP);
+    rcpp_result_gen = Rcpp::wrap(Partition(Ar, Br, SquaredAr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ElasticEnergy
+List ElasticEnergy(NumericMatrix X, NumericMatrix NodePositions, NumericMatrix ElasticMatrix, NumericVector Dists, double BranchingFee);
+RcppExport SEXP _distutils_ElasticEnergy(SEXP XSEXP, SEXP NodePositionsSEXP, SEXP ElasticMatrixSEXP, SEXP DistsSEXP, SEXP BranchingFeeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type NP(NPSEXP);
-    Rcpp::traits::input_parameter< int >::type BlockSize(BlockSizeSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type SquaredX(SquaredXSEXP);
-    rcpp_result_gen = Rcpp::wrap(fastPdist2List(X, NP, BlockSize, SquaredX));
+    Rcpp::traits::input_parameter< NumericMatrix >::type NodePositions(NodePositionsSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type ElasticMatrix(ElasticMatrixSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type Dists(DistsSEXP);
+    Rcpp::traits::input_parameter< double >::type BranchingFee(BranchingFeeSEXP);
+    rcpp_result_gen = Rcpp::wrap(ElasticEnergy(X, NodePositions, ElasticMatrix, Dists, BranchingFee));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_RFastDistance_fastPdist", (DL_FUNC) &_RFastDistance_fastPdist, 2},
-    {"_RFastDistance_fastPdist2List", (DL_FUNC) &_RFastDistance_fastPdist2List, 4},
+    {"_distutils_PartialDistance", (DL_FUNC) &_distutils_PartialDistance, 2},
+    {"_distutils_Partition", (DL_FUNC) &_distutils_Partition, 3},
+    {"_distutils_ElasticEnergy", (DL_FUNC) &_distutils_ElasticEnergy, 5},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_RFastDistance(DllInfo *dll) {
+RcppExport void R_init_distutils(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }
