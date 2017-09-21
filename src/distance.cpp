@@ -14,7 +14,7 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-NumericMatrix fastPdist(NumericMatrix Ar, NumericMatrix Br) {
+NumericMatrix PartialDistance(NumericMatrix Ar, NumericMatrix Br) {
   int m = Ar.nrow(), 
     n = Br.nrow(),
     k = Ar.ncol();
@@ -34,7 +34,7 @@ NumericMatrix fastPdist(NumericMatrix Ar, NumericMatrix Br) {
 
 
 // [[Rcpp::export]]
-List fastPdist2List(NumericMatrix X, NumericMatrix NP, int BlockSize, NumericVector SquaredX) {
+List Partition(NumericMatrix X, NumericMatrix NP, NumericVector SquaredX) {
   
   // Get dimension of the matrix
   int n = X.nrow(), 

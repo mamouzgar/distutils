@@ -1,2 +1,3 @@
 # RFastDistance
-Fast implementation of distance functions
+
+A collection of utilities to compute distance and energy

@@ -11,7 +11,7 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-List ComputeElasticEnergy(NumericMatrix X, NumericMatrix NodePositions, NumericMatrix ElasticMatrix, NumericVector Dists, double BranchingFee) {
+List ElasticEnergy(NumericMatrix X, NumericMatrix NodePositions, NumericMatrix ElasticMatrix, NumericVector Dists, double BranchingFee) {
   
   int k = NodePositions.nrow(),
     n = NodePositions.ncol(),
@@ -24,7 +24,6 @@ List ComputeElasticEnergy(NumericMatrix X, NumericMatrix NodePositions, NumericM
     TotEnergy = 0;
   
   arma::mat Lambda = arma::mat(ElasticMatrix.begin(), k, k, true);
-  //arma::mat Lambda = ElasticMatrix;
   arma::mat NP = arma::mat(NodePositions.begin(), k, n, false);
   arma::vec Mu = Lambda.diag(0);
   Lambda.diag(0).zeros();
@@ -43,22 +42,15 @@ List ComputeElasticEnergy(NumericMatrix X, NumericMatrix NodePositions, NumericM
   }
   
   arma::uvec leafs;
-  // arma::rowvec tVect;
-  
-  // Rcout << "dev=" << StarCenterIndices.size() << std::endl;
   
   for(i=0; i<StarCenterIndices.size(); i++){
     leafs = find(Lambda.col(StarCenterIndices[i]));
     j = leafs.size();
     dev = NP.row(StarCenterIndices[i]);
     for(k=0; k<j; k++){
-      // Rcout << "info:" << 1/(double)j*NP.row(leafs[k]) << std::endl;
       dev -= 1/((double)j)*NP.row(leafs[k]);
     }
     RP += Mu[StarCenterIndices[i]]*arma::dot(dev,dev);
-    // Rcout << "info:" << Mu[StarCenterIndices[i]]*arma::dot(dev,dev) << std::endl;
-    // Rcout << "dev=" << NP.row(StarCenterIndices[i]) << std::endl;
-    // Rcout << "dev=" << dev << std::endl;
   }
   
   

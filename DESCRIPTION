@@ -1,11 +1,11 @@
-Package: RFastDistance
+Package: distutils
 Type: Package
-Title: What the package does (short line)
+Title: A collection of Rcpp implementation of simple functions
 Version: 1.0
-Date: 2017-09-01
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Date: 2017-08-01
+Authors@R: person("Luca", "Albergante", email = "luca.albergante@gmail.com", role = c("aut", "cre"))
+Description: A collection of functions implemented in C++ to support the computation of distances
+and energy configurations of a set of points
+License: MIT
 Imports: Rcpp (>= 0.12.12)
 LinkingTo: Rcpp, RcppArmadillo
