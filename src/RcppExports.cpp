@@ -46,11 +46,43 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// ComputeWeightedAverage
+List ComputeWeightedAverage(NumericMatrix X, IntegerVector partition, NumericVector PointWeights, uint NumberOfNodes);
+RcppExport SEXP _distutils_ComputeWeightedAverage(SEXP XSEXP, SEXP partitionSEXP, SEXP PointWeightsSEXP, SEXP NumberOfNodesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type partition(partitionSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type PointWeights(PointWeightsSEXP);
+    Rcpp::traits::input_parameter< uint >::type NumberOfNodes(NumberOfNodesSEXP);
+    rcpp_result_gen = Rcpp::wrap(ComputeWeightedAverage(X, partition, PointWeights, NumberOfNodes));
+    return rcpp_result_gen;
+END_RCPP
+}
+// FitGraph2DataGivenPartition
+arma::mat FitGraph2DataGivenPartition(NumericMatrix X, NumericVector PointWeights, NumericMatrix NodePositions, NumericMatrix SpringLaplacianMatrix, IntegerVector partition, bool FastSolve);
+RcppExport SEXP _distutils_FitGraph2DataGivenPartition(SEXP XSEXP, SEXP PointWeightsSEXP, SEXP NodePositionsSEXP, SEXP SpringLaplacianMatrixSEXP, SEXP partitionSEXP, SEXP FastSolveSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type PointWeights(PointWeightsSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type NodePositions(NodePositionsSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type SpringLaplacianMatrix(SpringLaplacianMatrixSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type partition(partitionSEXP);
+    Rcpp::traits::input_parameter< bool >::type FastSolve(FastSolveSEXP);
+    rcpp_result_gen = Rcpp::wrap(FitGraph2DataGivenPartition(X, PointWeights, NodePositions, SpringLaplacianMatrix, partition, FastSolve));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_distutils_PartialDistance", (DL_FUNC) &_distutils_PartialDistance, 2},
     {"_distutils_Partition", (DL_FUNC) &_distutils_Partition, 3},
     {"_distutils_ElasticEnergy", (DL_FUNC) &_distutils_ElasticEnergy, 5},
+    {"_distutils_ComputeWeightedAverage", (DL_FUNC) &_distutils_ComputeWeightedAverage, 4},
+    {"_distutils_FitGraph2DataGivenPartition", (DL_FUNC) &_distutils_FitGraph2DataGivenPartition, 6},
     {NULL, NULL, 0}
 };
 

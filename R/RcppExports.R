@@ -5,7 +5,8 @@
 #' 
 #' This function computes the distance between a matrix of data points and a
 #' matrix of reference points. Both matrices need to have the same number of
-#' dimensions (columns)
+#' dimensions (columns). The code was taked from here: // C++ code taken from here:
+#' https://www.r-bloggers.com/pairwise-distances-in-r/
 #' 
 #' @param Ar A numeric n-by-m matrix containing the position of n data points m-dimensional points
 #' @param Br A numeric k-by-m matrix containing the position of k reference m-dimensional points
@@ -44,7 +45,7 @@ PartialDistance <- function(Ar, Br) {
 #' This is done to speed up the calculation when the same set o data points is clustered against
 #' a different set of reference point (e.g. in k-means)
 #' 
-#' @return @details list with two elements
+#' @return A list with two elements:
 #' * Patition is an integer vector indicating, for each point, the index of the closest reference point
 #' * Distance is a numeric vector indicating, for each point, the squared distance to the closest reference point
 #' @md
@@ -79,7 +80,39 @@ Partition <- function(Ar, Br, SquaredAr) {
     .Call('_distutils_Partition', PACKAGE = 'distutils', Ar, Br, SquaredAr)
 }
 
+#' Compute the elastic energy associated with a particular configuration 
+#' 
+#' This function computes the elastic energy associate to a set of points and graph embedded
+#' into them. See XXX for reference
+#' 
+#' @param X A numeric n-by-m matrix containing the position of n data points m-dimensional points
+#' @param NodePositions A numeric k-by-m matrix containing the position of the k nodes of the embedded graph
+#' @param ElasticMatrix A numeric l-by-l matrix containing the elastic parameters associates with the edge
+#' of the embedded graph
+#' @param Dists A numeric vector containind the squared distance of the data points to the closest node of the graph
+#' @param BranchingFee a numeric value currently unused
+#' 
+#' @return A list with four elements:
+#' * ElasticEnergy is the total energy
+#' * EP is the EP component of the energy
+#' * RS is the RS component of the energy
+#' * MSE is the MSE component of the energy
+#' @md
+#' 
+#' @export
+#' 
+#' @examples 
+#' 
 ElasticEnergy <- function(X, NodePositions, ElasticMatrix, Dists, BranchingFee) {
     .Call('_distutils_ElasticEnergy', PACKAGE = 'distutils', X, NodePositions, ElasticMatrix, Dists, BranchingFee)
+}
+
+ComputeWeightedAverage <- function(X, partition, PointWeights, NumberOfNodes) {
+    .Call('_distutils_ComputeWeightedAverage', PACKAGE = 'distutils', X, partition, PointWeights, NumberOfNodes)
+}
+
+#' 
+FitGraph2DataGivenPartition <- function(X, PointWeights, NodePositions, SpringLaplacianMatrix, partition, FastSolve) {
+    .Call('_distutils_FitGraph2DataGivenPartition', PACKAGE = 'distutils', X, PointWeights, NodePositions, SpringLaplacianMatrix, partition, FastSolve)
 }
 

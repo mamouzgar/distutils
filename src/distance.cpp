@@ -116,7 +116,7 @@ List Partition(NumericMatrix Ar, NumericMatrix Br, NumericVector SquaredAr) {
   arma::mat A = arma::mat(Ar.begin(), n, k, false); 
   arma::mat B = arma::mat(Br.begin(), m, k, false); 
   
-  arma::colvec An = SquaredAr;
+  arma::colvec An = arma::vec(SquaredAr.begin(), SquaredAr.size(), false);
   arma::colvec Bn = sum(square(B),1);
   
   arma::mat C = -2 * (A * B.t());
@@ -138,10 +138,10 @@ List Partition(NumericMatrix Ar, NumericMatrix Br, NumericVector SquaredAr) {
   arma::vec dist = C.elem(eids);
   
   std::vector<uint> Partition = arma::conv_to<std::vector<uint> >::from(IdxVect+1);
-  std::vector<double>Disttance = arma::conv_to<std::vector<double> >::from(dist);
+  std::vector<double> Distance = arma::conv_to<std::vector<double> >::from(dist);
   
   List RetList = List::create(Named("Patition") = wrap(Partition),
-                              Named("Dist") = wrap(Disttance));
+                              Named("Dist") = wrap(Distance));
   
   return RetList;
   
