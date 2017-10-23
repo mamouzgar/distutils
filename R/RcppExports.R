@@ -116,3 +116,34 @@ FitGraph2DataGivenPartition <- function(X, PointWeights, NodePositions, SpringLa
     .Call('_distutils_FitGraph2DataGivenPartition', PACKAGE = 'distutils', X, PointWeights, NodePositions, SpringLaplacianMatrix, partition, FastSolve)
 }
 
+#' Compute the number of points within a given distance
+#' 
+#' This function computes the distance between a matrix of data points and a
+#' single reference points. A sorted distance vector define the reference distances
+#' to consider
+#' 
+#' @param Ar A numeric n-by-m matrix containing the position of n data points m-dimensional points
+#' @param P A m dimensional vector matrix containing the position of the reference point
+#' @param DVect A k dimensional vector matrix containing the k distances to consider
+#' 
+#' @return A k-dimensional vector containing the number of points with a distance lower than k
+#' 
+#' @export
+#' 
+#' @examples 
+#' 
+#' A <- matrix(runif(10000*100), nrow = 10000)
+#' B <- matrix(runif(100*100), nrow = 100)
+#' 
+#' library(distutils)
+#' 
+#' print(system.time(C1 <- PartialDistance(A, B)))
+#' print(system.time(C2 <- as.matrix(dist(rbind(A,B)))[1:10000, 10001:10100]))
+#' 
+#' summary(as.vector(C1 - C2))
+#' 
+#' 
+RadialCount <- function(Ar, Pr, SquaredAr, DVect) {
+    .Call('_distutils_RadialCount', PACKAGE = 'distutils', Ar, Pr, SquaredAr, DVect)
+}
+

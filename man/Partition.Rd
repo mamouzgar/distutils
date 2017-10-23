@@ -16,7 +16,7 @@ This is done to speed up the calculation when the same set o data points is clus
 a different set of reference point (e.g. in k-means)}
 }
 \value{
-@details list with two elements
+A list with two elements:
 \itemize{
 \item Patition is an integer vector indicating, for each point, the index of the closest reference point
 \item Distance is a numeric vector indicating, for each point, the squared distance to the closest reference point

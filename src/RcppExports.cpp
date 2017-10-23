@@ -76,6 +76,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// RadialCount
+List RadialCount(NumericMatrix Ar, NumericVector Pr, NumericVector SquaredAr, NumericVector DVect);
+RcppExport SEXP _distutils_RadialCount(SEXP ArSEXP, SEXP PrSEXP, SEXP SquaredArSEXP, SEXP DVectSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type Ar(ArSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type Pr(PrSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type SquaredAr(SquaredArSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type DVect(DVectSEXP);
+    rcpp_result_gen = Rcpp::wrap(RadialCount(Ar, Pr, SquaredAr, DVect));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_distutils_PartialDistance", (DL_FUNC) &_distutils_PartialDistance, 2},
@@ -83,6 +97,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_distutils_ElasticEnergy", (DL_FUNC) &_distutils_ElasticEnergy, 5},
     {"_distutils_ComputeWeightedAverage", (DL_FUNC) &_distutils_ComputeWeightedAverage, 4},
     {"_distutils_FitGraph2DataGivenPartition", (DL_FUNC) &_distutils_FitGraph2DataGivenPartition, 6},
+    {"_distutils_RadialCount", (DL_FUNC) &_distutils_RadialCount, 4},
     {NULL, NULL, 0}
 };
 

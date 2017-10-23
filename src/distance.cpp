@@ -55,7 +55,13 @@ NumericMatrix PartialDistance(NumericMatrix Ar, NumericMatrix Br) {
   C.each_col() += An;
   C.each_row() += Bn.t();
   
-  return wrap(sqrt(C)); 
+  C = sqrt(C);
+  
+  // This is needed because if the distance is very close to zero
+  // it may become negative and hence the sqrt is NaN
+  C.replace(arma::datum::nan, 0);
+  
+  return wrap(C); 
 }
 
 
@@ -123,6 +129,8 @@ List Partition(NumericMatrix Ar, NumericMatrix Br, NumericVector SquaredAr) {
   C.each_col() += An;
   C.each_row() += Bn.t();
   
+  C.elem( find(C < 0) ).zeros();
+  
   arma::uvec IdxVect = arma::index_min(C, 1);
   arma::urowvec IdxVect2(n);
     
@@ -140,10 +148,13 @@ List Partition(NumericMatrix Ar, NumericMatrix Br, NumericVector SquaredAr) {
   std::vector<uint> Partition = arma::conv_to<std::vector<uint> >::from(IdxVect+1);
   std::vector<double> Distance = arma::conv_to<std::vector<double> >::from(dist);
   
-  List RetList = List::create(Named("Patition") = wrap(Partition),
+  List RetList = List::create(Named("Partition") = wrap(Partition),
                               Named("Dist") = wrap(Distance));
   
   return RetList;
   
 }
+
+
+
 

@@ -18,7 +18,8 @@ the k reference points
 \description{
 This function computes the distance between a matrix of data points and a
 matrix of reference points. Both matrices need to have the same number of
-dimensions (columns)
+dimensions (columns). The code was taked from here: // C++ code taken from here:
+https://www.r-bloggers.com/pairwise-distances-in-r/
 }
 \examples{
 

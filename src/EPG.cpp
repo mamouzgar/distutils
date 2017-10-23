@@ -183,6 +183,10 @@ arma::mat FitGraph2DataGivenPartition(
   double TotalWeight = sum(PointWeights);
   arma::uvec Indices;
   
+  Indices = find(Part == 0);
+  
+  // Rcout << "Ignored points=" << Indices.size() << std::endl;
+  
   for(i = 1; i <= NumberOfNodes; i++){
     
     Indices = find(Part == i);
