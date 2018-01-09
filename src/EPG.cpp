@@ -98,9 +98,9 @@ List ElasticEnergy(NumericMatrix X, NumericMatrix NodePositions, NumericMatrix E
 
 
 // [[Rcpp::export]]
-List ComputeWeightedAverage(NumericMatrix X, IntegerVector partition, NumericVector PointWeights, uint NumberOfNodes) {
+List ComputeWeightedAverage(NumericMatrix X, IntegerVector partition, NumericVector PointWeights, unsigned int NumberOfNodes) {
   
-  uint n = X.nrow(),
+  unsigned int n = X.nrow(),
     m = X.ncol(),
     i, j;
   
@@ -166,7 +166,7 @@ arma::mat FitGraph2DataGivenPartition(
     IntegerVector partition,
     bool FastSolve) {
   
-  uint n = X.nrow(),
+  unsigned int n = X.nrow(),
     m = X.ncol(),
     NumberOfNodes = SpringLaplacianMatrix.nrow(),
     i, j;

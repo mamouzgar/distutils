@@ -47,7 +47,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // ComputeWeightedAverage
-List ComputeWeightedAverage(NumericMatrix X, IntegerVector partition, NumericVector PointWeights, uint NumberOfNodes);
+List ComputeWeightedAverage(NumericMatrix X, IntegerVector partition, NumericVector PointWeights, unsigned int NumberOfNodes);
 RcppExport SEXP _distutils_ComputeWeightedAverage(SEXP XSEXP, SEXP partitionSEXP, SEXP PointWeightsSEXP, SEXP NumberOfNodesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -55,7 +55,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type partition(partitionSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type PointWeights(PointWeightsSEXP);
-    Rcpp::traits::input_parameter< uint >::type NumberOfNodes(NumberOfNodesSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type NumberOfNodes(NumberOfNodesSEXP);
     rcpp_result_gen = Rcpp::wrap(ComputeWeightedAverage(X, partition, PointWeights, NumberOfNodes));
     return rcpp_result_gen;
 END_RCPP
