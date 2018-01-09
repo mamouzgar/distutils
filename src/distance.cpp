@@ -145,7 +145,7 @@ List Partition(NumericMatrix Ar, NumericMatrix Br, NumericVector SquaredAr) {
   arma::uvec eids = sub2ind(size(C), locs);
   arma::vec dist = C.elem(eids);
   
-  std::vector<uint> Partition = arma::conv_to<std::vector<uint> >::from(IdxVect+1);
+  std::vector<unsigned int> Partition = arma::conv_to<std::vector<unsigned int> >::from(IdxVect+1);
   std::vector<double> Distance = arma::conv_to<std::vector<double> >::from(dist);
   
   List RetList = List::create(Named("Partition") = wrap(Partition),

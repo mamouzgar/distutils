@@ -145,8 +145,8 @@ List RadialCount(NumericMatrix Ar, NumericVector Pr, NumericVector SquaredAr, Nu
   
   ValidPoints = ValidPoints + 1;
   
-  std::vector<uint> PCountVect = arma::conv_to<std::vector<uint> >::from(PCount);
-  std::vector<uint> VPointsVect = arma::conv_to<std::vector<uint> >::from(ValidPoints);
+  std::vector<unsigned int> PCountVect = arma::conv_to<std::vector<unsigned int> >::from(PCount);
+  std::vector<unsigned int> VPointsVect = arma::conv_to<std::vector<unsigned int> >::from(ValidPoints);
   
   List RetList = List::create(Named("PCount") = wrap(PCountVect),
                               Named("Idxs") = wrap(VPointsVect));
