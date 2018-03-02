@@ -32,8 +32,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // ElasticEnergy
-List ElasticEnergy(NumericMatrix X, NumericMatrix NodePositions, NumericMatrix ElasticMatrix, NumericVector Dists, double BranchingFee);
-RcppExport SEXP _distutils_ElasticEnergy(SEXP XSEXP, SEXP NodePositionsSEXP, SEXP ElasticMatrixSEXP, SEXP DistsSEXP, SEXP BranchingFeeSEXP) {
+List ElasticEnergy(NumericMatrix X, NumericMatrix NodePositions, NumericMatrix ElasticMatrix, NumericVector Dists);
+RcppExport SEXP _distutils_ElasticEnergy(SEXP XSEXP, SEXP NodePositionsSEXP, SEXP ElasticMatrixSEXP, SEXP DistsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -41,8 +41,37 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericMatrix >::type NodePositions(NodePositionsSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type ElasticMatrix(ElasticMatrixSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type Dists(DistsSEXP);
-    Rcpp::traits::input_parameter< double >::type BranchingFee(BranchingFeeSEXP);
-    rcpp_result_gen = Rcpp::wrap(ElasticEnergy(X, NodePositions, ElasticMatrix, Dists, BranchingFee));
+    rcpp_result_gen = Rcpp::wrap(ElasticEnergy(X, NodePositions, ElasticMatrix, Dists));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ElasticEnergy_V0
+List ElasticEnergy_V0(NumericMatrix X, NumericMatrix NodePositions, NumericMatrix ElasticMatrix, NumericVector Dists);
+RcppExport SEXP _distutils_ElasticEnergy_V0(SEXP XSEXP, SEXP NodePositionsSEXP, SEXP ElasticMatrixSEXP, SEXP DistsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type NodePositions(NodePositionsSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type ElasticMatrix(ElasticMatrixSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type Dists(DistsSEXP);
+    rcpp_result_gen = Rcpp::wrap(ElasticEnergy_V0(X, NodePositions, ElasticMatrix, Dists));
+    return rcpp_result_gen;
+END_RCPP
+}
+// PenalizedElasticEnergy
+List PenalizedElasticEnergy(NumericMatrix X, NumericMatrix NodePositions, NumericMatrix ElasticMatrix, NumericVector Dists, double alpha, double beta);
+RcppExport SEXP _distutils_PenalizedElasticEnergy(SEXP XSEXP, SEXP NodePositionsSEXP, SEXP ElasticMatrixSEXP, SEXP DistsSEXP, SEXP alphaSEXP, SEXP betaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type NodePositions(NodePositionsSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type ElasticMatrix(ElasticMatrixSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type Dists(DistsSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< double >::type beta(betaSEXP);
+    rcpp_result_gen = Rcpp::wrap(PenalizedElasticEnergy(X, NodePositions, ElasticMatrix, Dists, alpha, beta));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -94,7 +123,9 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_distutils_PartialDistance", (DL_FUNC) &_distutils_PartialDistance, 2},
     {"_distutils_Partition", (DL_FUNC) &_distutils_Partition, 3},
-    {"_distutils_ElasticEnergy", (DL_FUNC) &_distutils_ElasticEnergy, 5},
+    {"_distutils_ElasticEnergy", (DL_FUNC) &_distutils_ElasticEnergy, 4},
+    {"_distutils_ElasticEnergy_V0", (DL_FUNC) &_distutils_ElasticEnergy_V0, 4},
+    {"_distutils_PenalizedElasticEnergy", (DL_FUNC) &_distutils_PenalizedElasticEnergy, 6},
     {"_distutils_ComputeWeightedAverage", (DL_FUNC) &_distutils_ComputeWeightedAverage, 4},
     {"_distutils_FitGraph2DataGivenPartition", (DL_FUNC) &_distutils_FitGraph2DataGivenPartition, 6},
     {"_distutils_RadialCount", (DL_FUNC) &_distutils_RadialCount, 4},
