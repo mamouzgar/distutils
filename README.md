@@ -1,3 +1,3 @@
 # RFastDistance
 
-A collection of utilities to compute distance and energy
+A collection of C++ functions for fast computation of distances and elastic energies
