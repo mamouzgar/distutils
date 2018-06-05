@@ -8,7 +8,6 @@
 //
 // [[Rcpp::depends(RcppArmadillo)]]
 
-
 using namespace Rcpp;
 
 //' Compute the partial distance between matrices

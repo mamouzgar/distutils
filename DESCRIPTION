@@ -6,6 +6,8 @@ Date: 2017-08-01
 Authors@R: person("Luca", "Albergante", email = "luca.albergante@gmail.com", role = c("aut", "cre"))
 Description: A collection of functions implemented in C++ to support the computation of distances and energy configurations of a set of points
 License: MIT
-Imports: Rcpp (>= 0.12.12)
+Imports:
+    Rcpp (>= 0.12.12),
+    RcppArmadillo (>= 0.7.960)
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 6.0.1
